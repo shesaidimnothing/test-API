@@ -4,9 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage as ChatMessageType, AIService, DEFAULT_CONFIG } from "@/lib/api";
 import ChatMessage from "@/components/ChatMessage";
-import ChatInput from "@/components/ChatInput";
 import LoadingIndicator from "@/components/LoadingIndicator";
-import WelcomeScreen from "@/components/WelcomeScreen";
 
 export default function Home() {
   // États pour la gestion des messages et de l'interface
@@ -70,7 +68,7 @@ export default function Home() {
       // Message de fallback en cas d'erreur
       const errorMessage: ChatMessageType = {
         id: (Date.now() + 1).toString(),
-        content: "Désolé, j'ai rencontré une erreur. Veuillez réessayer plus tard.",
+        content: "Désolé, j&apos;ai rencontré une erreur. Veuillez réessayer plus tard.",
         role: "assistant",
         timestamp: new Date(),
       };
@@ -165,7 +163,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.4, duration: 0.5 }}
                 >
-                  Start a conversation by typing your message below. I'm here to help with any questions or tasks you might have.
+                  Start a conversation by typing your message below. I&apos;m here to help with any questions or tasks you might have.
                 </motion.p>
               </motion.div>
             ) : (
