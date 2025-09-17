@@ -66,7 +66,7 @@ export default function WelcomeScreen() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.5 }}
       >
-        Start a conversation by typing your message below. I'm here to help with any questions or tasks you might have.
+        Start a conversation by typing your message below. I&apos;m here to help with any questions or tasks you might have.
       </motion.p>
       
       {/* Grille des fonctionnalités */}

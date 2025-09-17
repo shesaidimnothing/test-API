@@ -70,7 +70,7 @@ export const CONFIG = {
 
 // Environment validation
 export const validateConfig = () => {
-  const requiredEnvVars = [
+  const requiredEnvVars: string[] = [
     // Add any required environment variables here
     // 'NEXT_PUBLIC_API_KEY',
   ];

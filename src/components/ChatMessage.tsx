@@ -4,11 +4,10 @@ import { ChatMessage as ChatMessageType } from "@/lib/api";
 // Interface pour les propriétés du composant ChatMessage
 interface ChatMessageProps {
   message: ChatMessageType;
-  isLast?: boolean;
 }
 
 // Composant pour afficher un message de chat avec animations
-export default function ChatMessage({ message, isLast = false }: ChatMessageProps) {
+export default function ChatMessage({ message }: ChatMessageProps) {
   return (
     <motion.div
       className={`flex gap-4 ${
