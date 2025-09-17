@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ChatMessage as ChatMessageType } from "@/lib/api";
+import MessageContent from "./MessageContent";
 
 // Interface pour les propriétés du composant ChatMessage
 interface ChatMessageProps {
@@ -42,7 +43,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       
       {/* Bulle de message */}
       <motion.div
-        className={`max-w-[80%] rounded-2xl px-6 py-4 ${
+        className={`max-w-[90%] min-w-[300px] rounded-2xl px-6 py-4 ${
           message.role === "user"
             ? "bg-black text-white"
             : "bg-gray-100 text-black border border-gray-300"
@@ -60,19 +61,19 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
         }}
       >
-        {/* Contenu du message */}
-        <motion.p 
-          className="whitespace-pre-wrap text-base leading-relaxed"
+        {/* Contenu du message avec coloration syntaxique */}
+        <motion.div
+          className="max-h-[600px] overflow-y-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          {message.content}
-        </motion.p>
+          <MessageContent content={message.content} />
+        </motion.div>
         
         {/* Horodatage */}
         <motion.p 
-          className="text-xs opacity-60 mt-2"
+          className="text-xs opacity-60 mt-4 pt-2 border-t border-gray-200 dark:border-gray-600"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 0.6, y: 0 }}
           transition={{ delay: 0.4, duration: 0.3 }}

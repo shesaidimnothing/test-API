@@ -3,14 +3,14 @@
 export const CONFIG = {
   // API Configuration
   API: {
-    // Base URL for AI API (will be replaced with actual API endpoint)
-    BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.openai.com/v1",
+    // Base URL for Ollama API
+    BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:11434",
     
-    // API Key (should be stored in environment variables)
-    API_KEY: process.env.NEXT_PUBLIC_API_KEY || "demo-key",
+    // API Key (not needed for local Ollama)
+    API_KEY: process.env.NEXT_PUBLIC_API_KEY || "",
     
-    // Default model to use
-    DEFAULT_MODEL: process.env.NEXT_PUBLIC_DEFAULT_MODEL || "gpt-3.5-turbo",
+    // Default model to use (Ollama model)
+    DEFAULT_MODEL: process.env.NEXT_PUBLIC_DEFAULT_MODEL || "GandalfBaum/deepseek_r1-claude3.7:latest",
     
     // Request timeout in milliseconds
     TIMEOUT: 30000,

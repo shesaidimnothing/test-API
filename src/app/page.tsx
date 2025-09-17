@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage as ChatMessageType, AIService, DEFAULT_CONFIG } from "@/lib/api";
+import { CONFIG } from "@/lib/config";
 import ChatMessage from "@/components/ChatMessage";
 import LoadingIndicator from "@/components/LoadingIndicator";
 
@@ -16,8 +17,8 @@ export default function Home() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   
-  // Initialisation du service IA (dans une vraie app, cela viendrait des variables d'environnement)
-  const aiService = new AIService("demo-key");
+  // Initialisation du service IA avec la configuration Ollama
+  const aiService = new AIService(CONFIG.API.BASE_URL, CONFIG.API.DEFAULT_MODEL, true);
 
   // Fonction pour faire défiler automatiquement vers le bas des messages
   const scrollToBottom = () => {
@@ -127,7 +128,7 @@ export default function Home() {
 
           {/* Zone des messages - Toujours visible, au-dessus du prompt */}
           <motion.div 
-            className="bg-white rounded-2xl p-8 h-96 overflow-y-auto shadow-2xl border-2 border-gray-200"
+            className="bg-white rounded-2xl p-8 min-h-[500px] max-h-[800px] overflow-y-auto shadow-2xl border-2 border-gray-200"
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
