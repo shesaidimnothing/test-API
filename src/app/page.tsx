@@ -231,9 +231,9 @@ export default function Home() {
                   rows={1}
                   disabled={isLoading}
                   style={{ 
-                    textAlign: &apos;left&apos;,
-                    display: &apos;flex&apos;,
-                    alignItems: &apos;center&apos;
+                    textAlign: 'left',
+                    display: 'flex',
+                    alignItems: 'center'
                   }}
                   whileFocus={{ scale: 1.02 }}
                 />
@@ -286,8 +286,8 @@ export default function Home() {
                 <motion.div
                   key={index}
                   className={`w-2 h-2 rounded-full shadow-sm ${
-                    index === 0 ? &apos;bg-green-500&apos; : 
-                    index === 1 || index === 3 ? &apos;bg-orange-500&apos; : &apos;bg-red-500&apos;
+                    index === 0 ? 'bg-green-500' : 
+                    index === 1 || index === 3 ? 'bg-orange-500' : 'bg-red-500'
                   }`}
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
