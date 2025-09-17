@@ -274,14 +274,24 @@ export default function Home() {
             transition={{ delay: 0.7, duration: 0.6 }}
             whileHover={{ scale: 1.01 }}
           >
-            <motion.span 
-              className="text-gray-600 text-sm font-medium"
+            <motion.div 
+              className="flex items-center gap-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.5 }}
             >
-              Ready to assist you with any questions
-            </motion.span>
+              <span className="text-gray-600 text-sm font-medium">
+                {process.env.NODE_ENV === 'production' && !CONFIG.API.BASE_URL.includes('127.0.0.1') 
+                  ? "IA Externe - Vercel" 
+                  : "Ready to assist you with any questions"
+                }
+              </span>
+              {process.env.NODE_ENV === 'production' && !CONFIG.API.BASE_URL.includes('127.0.0.1') && (
+                <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">
+                  AI
+                </span>
+              )}
+            </motion.div>
             <div className="flex items-center gap-2">
               {[0, 1, 2, 3].map((index) => (
                 <motion.div
