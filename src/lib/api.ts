@@ -121,7 +121,12 @@ export class AIService {
   private async tryTunnelAPI(request: ChatRequest): Promise<ChatResponse | null> {
     try {
       const tunnelUrl = process.env.OLLAMA_TUNNEL_URL;
-      if (!tunnelUrl) return null;
+      console.log('🔍 Tentative de connexion tunnel:', tunnelUrl);
+      
+      if (!tunnelUrl) {
+        console.log('❌ OLLAMA_TUNNEL_URL non définie');
+        return null;
+      }
 
       // Préparer les messages pour l'API Ollama
       const ollamaMessages = request.messages.map(msg => ({
@@ -147,7 +152,12 @@ export class AIService {
         body: JSON.stringify(requestBody)
       });
 
-      if (!response.ok) return null;
+      console.log('📡 Réponse tunnel:', response.status, response.statusText);
+      
+      if (!response.ok) {
+        console.log('❌ Erreur tunnel:', await response.text());
+        return null;
+      }
 
       const data = await response.json();
       return {
