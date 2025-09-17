@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+// Composant pour afficher un indicateur de chargement avec animations
 export default function LoadingIndicator() {
   return (
     <motion.div 
@@ -8,6 +9,7 @@ export default function LoadingIndicator() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
+      {/* Avatar de l'assistant IA */}
       <motion.div 
         className="w-10 h-10 bg-black rounded-full flex items-center justify-center flex-shrink-0"
         initial={{ scale: 0, rotate: -180 }}
@@ -21,6 +23,8 @@ export default function LoadingIndicator() {
       >
         <span className="text-white font-medium text-sm">AI</span>
       </motion.div>
+      
+      {/* Bulle de chargement */}
       <motion.div 
         className="bg-gray-100 rounded-2xl px-6 py-4 border border-gray-300"
         initial={{ scale: 0.8, opacity: 0 }}
@@ -32,6 +36,7 @@ export default function LoadingIndicator() {
           stiffness: 150
         }}
       >
+        {/* Points de chargement animés */}
         <div className="flex gap-2">
           {[0, 1, 2].map((index) => (
             <motion.div

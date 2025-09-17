@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { ChatMessage as ChatMessageType } from "@/lib/api";
 
+// Interface pour les propriétés du composant ChatMessage
 interface ChatMessageProps {
   message: ChatMessageType;
   isLast?: boolean;
 }
 
+// Composant pour afficher un message de chat avec animations
 export default function ChatMessage({ message, isLast = false }: ChatMessageProps) {
   return (
     <motion.div
@@ -21,6 +23,7 @@ export default function ChatMessage({ message, isLast = false }: ChatMessageProp
       }}
       whileHover={{ scale: 1.02 }}
     >
+      {/* Avatar de l'assistant IA */}
       {message.role === "assistant" && (
         <motion.div 
           className="w-10 h-10 bg-black rounded-full flex items-center justify-center flex-shrink-0"
@@ -37,6 +40,8 @@ export default function ChatMessage({ message, isLast = false }: ChatMessageProp
           <span className="text-white font-medium text-sm">AI</span>
         </motion.div>
       )}
+      
+      {/* Bulle de message */}
       <motion.div
         className={`max-w-[80%] rounded-2xl px-6 py-4 ${
           message.role === "user"
@@ -56,6 +61,7 @@ export default function ChatMessage({ message, isLast = false }: ChatMessageProp
           boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
         }}
       >
+        {/* Contenu du message */}
         <motion.p 
           className="whitespace-pre-wrap text-base leading-relaxed"
           initial={{ opacity: 0 }}
@@ -64,6 +70,8 @@ export default function ChatMessage({ message, isLast = false }: ChatMessageProp
         >
           {message.content}
         </motion.p>
+        
+        {/* Horodatage */}
         <motion.p 
           className="text-xs opacity-60 mt-2"
           initial={{ opacity: 0, y: 10 }}
@@ -73,6 +81,8 @@ export default function ChatMessage({ message, isLast = false }: ChatMessageProp
           {message.timestamp.toLocaleTimeString()}
         </motion.p>
       </motion.div>
+      
+      {/* Avatar de l'utilisateur */}
       {message.role === "user" && (
         <motion.div 
           className="w-10 h-10 bg-black rounded-full flex items-center justify-center flex-shrink-0"

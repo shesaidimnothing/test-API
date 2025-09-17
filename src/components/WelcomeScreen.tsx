@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 
+// Composant d'écran d'accueil avec animations
 export default function WelcomeScreen() {
+  // Données des fonctionnalités à afficher
   const features = [
     {
       icon: "💡",
@@ -31,6 +33,7 @@ export default function WelcomeScreen() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {/* Logo principal de l'assistant IA */}
       <motion.div 
         className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6"
         initial={{ scale: 0, rotate: -180 }}
@@ -46,6 +49,7 @@ export default function WelcomeScreen() {
         <span className="text-white font-bold text-2xl">AI</span>
       </motion.div>
       
+      {/* Titre de bienvenue */}
       <motion.h2 
         className="text-3xl font-semibold text-black mb-3"
         initial={{ opacity: 0, y: 20 }}
@@ -55,6 +59,7 @@ export default function WelcomeScreen() {
         Welcome to AI Assistant
       </motion.h2>
       
+      {/* Description */}
       <motion.p 
         className="text-gray-600 max-w-md mb-8 text-lg"
         initial={{ opacity: 0, y: 20 }}
@@ -64,6 +69,7 @@ export default function WelcomeScreen() {
         Start a conversation by typing your message below. I'm here to help with any questions or tasks you might have.
       </motion.p>
       
+      {/* Grille des fonctionnalités */}
       <motion.div 
         className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl w-full"
         initial={{ opacity: 0, y: 30 }}
@@ -88,6 +94,7 @@ export default function WelcomeScreen() {
               y: -5
             }}
           >
+            {/* Titre de la fonctionnalité */}
             <motion.h3 
               className="font-semibold text-black mb-3 text-lg"
               initial={{ opacity: 0 }}
@@ -96,6 +103,8 @@ export default function WelcomeScreen() {
             >
               {feature.icon} {feature.title}
             </motion.h3>
+            
+            {/* Description de la fonctionnalité */}
             <motion.p 
               className="text-gray-600"
               initial={{ opacity: 0 }}

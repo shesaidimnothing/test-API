@@ -9,24 +9,29 @@ import LoadingIndicator from "@/components/LoadingIndicator";
 import WelcomeScreen from "@/components/WelcomeScreen";
 
 export default function Home() {
+  // États pour la gestion des messages et de l'interface
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState("");
+  
+  // Références pour le scroll automatique et la textarea
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   
-  // Initialize AI service (in a real app, this would come from environment variables)
+  // Initialisation du service IA (dans une vraie app, cela viendrait des variables d'environnement)
   const aiService = new AIService("demo-key");
 
+  // Fonction pour faire défiler automatiquement vers le bas des messages
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Effet pour faire défiler vers le bas quand de nouveaux messages arrivent
   useEffect(() => {
     scrollToBottom();
   }, [messages, isLoading]);
 
-  // Auto-resize textarea
+  // Auto-redimensionnement de la textarea
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -34,10 +39,12 @@ export default function Home() {
     }
   }, [input]);
 
+  // Gestionnaire de soumission du formulaire
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
+    // Création du message utilisateur
     const userMessage: ChatMessageType = {
       id: Date.now().toString(),
       content: input.trim(),
@@ -45,12 +52,13 @@ export default function Home() {
       timestamp: new Date(),
     };
 
+    // Ajout du message utilisateur et réinitialisation de l'input
     setMessages(prev => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
 
     try {
-      // Use the AI service to get a response
+      // Utilisation du service IA pour obtenir une réponse
       const response = await aiService.sendMessage({
         messages: [...messages, userMessage],
         ...DEFAULT_CONFIG,
@@ -58,11 +66,11 @@ export default function Home() {
       
       setMessages(prev => [...prev, response.message]);
     } catch (error) {
-      console.error("Error getting AI response:", error);
-      // Fallback response in case of error
+      console.error("Erreur lors de la récupération de la réponse IA:", error);
+      // Message de fallback en cas d'erreur
       const errorMessage: ChatMessageType = {
         id: (Date.now() + 1).toString(),
-        content: "Sorry, I encountered an error. Please try again later.",
+        content: "Désolé, j'ai rencontré une erreur. Veuillez réessayer plus tard.",
         role: "assistant",
         timestamp: new Date(),
       };
@@ -79,7 +87,7 @@ export default function Home() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Header - Top Right Icon */}
+      {/* En-tête - Icône en haut à droite */}
       <motion.header 
         className="absolute top-0 right-0 p-6"
         initial={{ opacity: 0, y: -20 }}
@@ -95,10 +103,10 @@ export default function Home() {
         </motion.div>
       </motion.header>
 
-      {/* Main Content - Centered */}
+      {/* Contenu principal - Centré */}
       <main className="flex flex-col items-center justify-center min-h-screen px-4">
         <div className="w-full max-w-4xl space-y-6">
-          {/* Main Title */}
+          {/* Titre principal */}
           <motion.div 
             className="text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -119,7 +127,7 @@ export default function Home() {
             </motion.h1>
           </motion.div>
 
-          {/* Messages Area - Always visible, above prompt */}
+          {/* Zone des messages - Toujours visible, au-dessus du prompt */}
           <motion.div 
             className="bg-white rounded-2xl p-8 h-96 overflow-y-auto shadow-2xl border-2 border-gray-200"
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
@@ -197,7 +205,7 @@ export default function Home() {
             <div ref={messagesEndRef} />
           </motion.div>
 
-          {/* Main Prompt Input Box */}
+          {/* Boîte de saisie principale */}
           <motion.form 
             onSubmit={handleSubmit} 
             className="bg-white rounded-2xl p-4 shadow-2xl border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 focus-within:border-gray-400 focus-within:shadow-3xl"
@@ -208,7 +216,7 @@ export default function Home() {
             whileFocus={{ scale: 1.02 }}
           >
             <div className="flex items-center gap-3">
-              {/* Input Area */}
+              {/* Zone de saisie */}
               <div className="flex-1 flex items-center">
                 <motion.textarea
                   ref={textareaRef}
@@ -233,7 +241,7 @@ export default function Home() {
                 />
               </div>
 
-              {/* Send Button */}
+              {/* Bouton d'envoi */}
               <motion.button
                 type="submit"
                 disabled={!input.trim() || isLoading}
@@ -259,7 +267,7 @@ export default function Home() {
             </div>
           </motion.form>
 
-          {/* Status Bar */}
+          {/* Barre de statut */}
           <motion.div 
             className="bg-white rounded-2xl px-6 py-4 flex items-center justify-between border-2 border-gray-200 shadow-lg"
             initial={{ opacity: 0, y: 30 }}

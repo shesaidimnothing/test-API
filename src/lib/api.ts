@@ -1,6 +1,7 @@
-// API utilities for AI model integration
-// This file will be used to integrate with real AI models and APIs
+// Utilitaires API pour l'intégration des modèles IA
+// Ce fichier sera utilisé pour intégrer de vrais modèles IA et des APIs
 
+// Interface pour un message de chat
 export interface ChatMessage {
   id: string;
   content: string;
@@ -8,6 +9,7 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
+// Interface pour une requête de chat
 export interface ChatRequest {
   messages: ChatMessage[];
   model?: string;
@@ -15,6 +17,7 @@ export interface ChatRequest {
   maxTokens?: number;
 }
 
+// Interface pour une réponse de chat
 export interface ChatResponse {
   message: ChatMessage;
   usage?: {
@@ -24,7 +27,7 @@ export interface ChatResponse {
   };
 }
 
-// Placeholder for future AI API integration
+// Classe de service IA pour l'intégration future des APIs
 export class AIService {
   private apiKey: string;
   private baseUrl: string;
@@ -34,14 +37,15 @@ export class AIService {
     this.baseUrl = baseUrl;
   }
 
+  // Méthode pour envoyer un message et recevoir une réponse
   async sendMessage(request: ChatRequest): Promise<ChatResponse> {
-    // TODO: Implement actual API call to AI model
-    // This is a placeholder that simulates an API call
+    // TODO: Implémenter un vrai appel API vers le modèle IA
+    // Ceci est un placeholder qui simule un appel API
     
-    // Simulate API delay
+    // Simulation du délai API
     await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
     
-    // Generate a mock response based on the user's message
+    // Génération d'une réponse simulée basée sur le message de l'utilisateur
     const lastMessage = request.messages[request.messages.length - 1];
     const mockResponse = this.generateMockResponse(lastMessage.content);
     
@@ -53,13 +57,14 @@ export class AIService {
         timestamp: new Date(),
       },
       usage: {
-        promptTokens: lastMessage.content.length / 4, // Rough estimation
+        promptTokens: lastMessage.content.length / 4, // Estimation approximative
         completionTokens: mockResponse.length / 4,
         totalTokens: (lastMessage.content.length + mockResponse.length) / 4,
       }
     };
   }
 
+  // Méthode privée pour générer une réponse simulée
   private generateMockResponse(userMessage: string): string {
     const responses = [
       "I understand your question. This is a placeholder response that will be replaced with actual AI model responses once the API integration is complete.",
@@ -69,7 +74,7 @@ export class AIService {
       "I see what you're asking about. The current system is just a demo - the real AI integration will be much more powerful.",
     ];
     
-    // Simple keyword-based response selection
+    // Sélection de réponse basée sur des mots-clés simples
     const message = userMessage.toLowerCase();
     if (message.includes("hello") || message.includes("hi")) {
       return "Hello! I'm your AI assistant. This is a demo response - the real AI model will be connected soon!";
@@ -85,7 +90,7 @@ export class AIService {
   }
 }
 
-// Configuration for different AI models
+// Configuration pour différents modèles IA
 export const AI_MODELS = {
   GPT_4: "gpt-4",
   GPT_3_5_TURBO: "gpt-3.5-turbo",
@@ -96,7 +101,7 @@ export const AI_MODELS = {
 
 export type AIModel = typeof AI_MODELS[keyof typeof AI_MODELS];
 
-// Default configuration
+// Configuration par défaut
 export const DEFAULT_CONFIG = {
   model: AI_MODELS.GPT_3_5_TURBO,
   temperature: 0.7,
