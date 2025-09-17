@@ -46,7 +46,7 @@ export const CONFIG = {
     SYSTEM_PROMPT: "You are a helpful AI assistant. Provide clear, accurate, and helpful responses to user questions.",
     
     // Welcome message
-    WELCOME_MESSAGE: "Hello! I'm your AI assistant. How can I help you today?",
+    WELCOME_MESSAGE: "Hello! I&apos;m your AI assistant. How can I help you today?",
   },
   
   // Features
